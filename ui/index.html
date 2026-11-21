@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self'; img-src 'self' data:; font-src 'self'; connect-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'">
+  <title>Orbit Relay</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="inspired.css">
+  <link rel="stylesheet" href="monoglass.css">
+  <script src="app.js" defer></script>
+</head>
+<body>
+  <div class="shell">
+    <aside class="sidebar">
+      <div class="brand"><span class="mark" aria-hidden="true"><span></span></span><div><strong>ORBIT</strong><small>RELAY</small></div></div>
+      <div class="side-label">YOUR COMPUTER</div>
+      <nav aria-label="Primary navigation">
+        <button class="nav active" data-page="home"><span class="nav-icon" data-icon="grid"></span>Overview</button>
+        <button class="nav" data-page="repairs"><span class="nav-icon" data-icon="sparkles"></span>Fix center</button>
+        <button class="nav" data-page="report"><span class="nav-icon" data-icon="file"></span>Support report</button>
+      </nav>
+      <div class="sidebar-bottom"><span class="status-dot"></span> Local by default<br><small>No account. No cloud.</small></div>
+    </aside>
+
+    <main>
+      <header class="topbar"><div class="topbar-identity"><div class="window-controls"><button data-window="close" class="window-dot close" aria-label="Close window"></button><button data-window="minimize" class="window-dot minimize" aria-label="Minimize window"></button><button data-window="maximize" class="window-dot maximize" aria-label="Maximize window"></button></div><span class="topbar-brand"><span class="mark" aria-hidden="true"><span></span></span>Relay</span></div><nav class="header-nav" aria-label="Primary navigation"><button class="nav active" data-page="home" aria-current="page">Overview</button><button class="nav" data-page="repairs">Fix center</button><button class="nav" data-page="report">Support report</button></nav><div class="topbar-actions"><span class="local-badge"><span class="status-dot"></span>Local & private</span><button class="transparency-toggle" id="transparency-toggle" aria-label="Adjust transparency" aria-controls="transparency-popover" aria-expanded="false"><span data-icon="sliders"></span></button><button id="scan-button" class="button subtle"><span class="inline-icon" data-icon="refresh"></span>Scan again</button></div></header>
+      <div class="transparency-popover" id="transparency-popover" role="dialog" aria-label="Window transparency" hidden><div class="transparency-heading"><span>Window transparency</span><strong data-transparency-value>48%</strong></div><input type="range" min="0" max="80" step="1" value="48" data-transparency-slider aria-label="Window transparency"><div class="transparency-scale"><span>Solid</span><span>Clear</span></div></div>
+      <div class="content">
+        <section id="home" class="page active" aria-labelledby="home-title">
+          <div class="home-intro">
+            <div class="intro-copy">
+              <div id="system-line" class="system-pill">Checking this computer…</div>
+              <p class="eyebrow">YOUR COMPUTER / OVERVIEW</p>
+              <h1 id="home-title">Your system, <em>understood.</em></h1>
+              <p class="lead">Find the likely cause, see what will change, and keep a way back.</p>
+            </div>
+            <div class="intro-orbit" aria-hidden="true"><span class="mark"><span></span></span></div>
+          </div>
+          <div class="section-heading"><h2>What we found</h2><span id="scan-time">Scanning…</span></div>
+          <div class="cards">
+            <article class="card"><div class="card-icon" data-icon="activity"></div><div><div class="card-top"><h3>Audio service</h3><span id="audio-state" class="badge">Checking</span></div><p id="audio-summary">Checking PipeWire…</p><small id="audio-advice"></small></div></article>
+            <article class="card"><div class="card-icon" data-icon="shield"></div><div><div class="card-top"><h3>App permissions</h3><span id="flatpak-state" class="badge">Checking</span></div><p id="flatpak-summary">Checking Flatpak…</p><small>Review app specific permission changes in Fix center.</small><button class="card-action" data-go="repairs">Review permissions <span class="inline-icon" data-icon="arrow-right"></span></button></div></article>
+            <article class="card changes-card"><div class="card-icon" data-icon="app"></div><div><div class="card-top"><h3>User changes</h3><span id="changes-state" class="badge">Checking</span></div><strong id="changes-count" class="change-number">—</strong><small id="changes-detail">Checking app permission changes…</small><button class="card-action" data-go="repairs" data-filter="changed">Inspect changes <span class="inline-icon" data-icon="arrow-right"></span></button></div></article>
+          </div>
+          <div class="overview-details">
+            <section class="profile-panel" aria-labelledby="profile-title"><div class="overview-panel-head"><div><p class="eyebrow">THIS COMPUTER</p><h2 id="profile-title">System profile</h2></div><span class="panel-mark" data-icon="grid"></span></div><div class="profile-grid"><div><span>Operating system</span><strong id="profile-os">Checking…</strong></div><div><span>Desktop</span><strong id="profile-desktop">Checking…</strong></div><div><span>Session</span><strong id="profile-session">Checking…</strong></div><div><span>Flatpak apps</span><strong id="profile-apps">Checking…</strong></div></div></section>
+            <section class="next-panel" aria-labelledby="next-title"><div class="overview-panel-head"><div><p class="eyebrow">A CLEARER PATH</p><h2 id="next-title">Your next step</h2></div><span class="panel-mark" data-icon="sparkles"></span></div><p id="next-summary">Scanning this computer for a useful place to start.</p><div class="next-footer"><span id="profile-changes">Checking permission changes…</span><button class="card-action" data-go="repairs">Open Fix center <span class="inline-icon" data-icon="arrow-right"></span></button></div></section>
+          </div>
+          <div class="feature-strip"><span class="feature-symbol" data-icon="sparkles"></span><div><strong>Need a second pair of eyes?</strong><p>Make a small, private support report you can inspect before sharing.</p></div><button class="button" data-go="report">View report <span class="inline-icon" data-icon="arrow-right"></span></button></div>
+        </section>
+
+        <section id="repairs" class="page" aria-labelledby="repairs-title">
+          <p class="eyebrow">Fix center</p><h1 id="repairs-title">App permissions</h1>
+          <p class="lead">A changed Flatpak permission can stop an app from opening files or sharing its screen. Select an app to inspect its user changes.</p>
+          <div class="search-wrap"><label for="app-search">Search installed Flatpak apps</label><div class="search-controls"><input id="app-search" type="search" placeholder="Find an app…" autocomplete="off"><button id="changed-only" class="filter-chip" type="button" aria-pressed="false">Changed only</button></div></div>
+          <div class="repair-layout"><div id="app-list" class="app-list" aria-label="Installed Flatpak applications"><p class="empty">Scanning apps…</p></div><div id="repair-detail" class="detail"><div class="empty-detail"><span data-icon="grid"></span><h2>Choose an app</h2><p>Relay will show its permission changes and the proposed repair.</p></div></div></div>
+          <div id="undo-banner" class="undo-banner" hidden><div><strong>Permissions reset.</strong><p id="undo-text"></p></div><button id="undo-button" class="button">Undo change</button></div>
+        </section>
+
+        <section id="report" class="page" aria-labelledby="report-title">
+          <p class="eyebrow">Get help from your community</p><h1 id="report-title">Support report</h1>
+          <p class="lead">Preview exactly what the saved file contains. Add your own description when posting it to a forum or Discord.</p>
+          <div class="report-note"><span data-icon="shield"></span><p>Relay leaves out your username, hostname, paths, network addresses, app names, logs, and raw command output.</p></div>
+          <div class="report-toolbar"><h2>Exact file contents</h2><div class="report-actions"><button id="refresh-report" class="button subtle">Refresh preview</button><button id="export-report" class="button primary">Save JSON report</button></div></div>
+          <pre id="report-preview" tabindex="0">Preparing report…</pre>
+        </section>
+      </div>
+      <div id="toast" class="toast" role="status" aria-live="polite"></div>
+    </main>
+  </div>
+</body>
+</html>

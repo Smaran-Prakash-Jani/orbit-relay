@@ -1,0 +1,56 @@
+{
+  "name": "orbit-relay",
+  "version": "0.1.1",
+  "private": true,
+  "description": "Local Linux repair and support companion",
+  "productName": "Orbit Relay",
+  "author": "Orbit Relay contributors",
+  "license": "MIT",
+  "homepage": "https://github.com/Smaran-Prakash-Jani/orbit-relay",
+  "desktopName": "io.github.orbitdesktop.Relay.desktop",
+  "main": "desktop/main.cjs",
+  "scripts": {
+    "start": "electron .",
+    "check": "node --check desktop/core.cjs && node --check desktop/main.cjs && node --check desktop/preload.cjs && node --check ui/app.js && node --check scripts/install-user.cjs && node --check scripts/desktop-smoke.cjs",
+    "test": "node --test test/*.test.cjs",
+    "test:desktop": "node scripts/desktop-smoke.cjs",
+    "build:linux": "electron-builder --linux dir deb AppImage --x64 --publish never",
+    "install:user": "node scripts/install-user.cjs",
+    "install:user:replace": "node scripts/install-user.cjs --replace"
+  },
+  "devDependencies": {
+    "electron": "45.3.3",
+    "electron-builder": "26.18.0",
+    "playwright": "^1.65.1"
+  },
+  "build": {
+    "appId": "io.github.orbitdesktop.Relay",
+    "productName": "Orbit Relay",
+    "directories": {
+      "output": "release",
+      "buildResources": "assets"
+    },
+    "files": [
+      "desktop/**/*",
+      "ui/**/*",
+      "assets/icon.png",
+      "package.json"
+    ],
+    "asar": true,
+    "artifactName": "Orbit-Relay-${version}-${os}-${arch}.${ext}",
+    "linux": {
+      "target": [
+        "dir",
+        "deb",
+        "AppImage"
+      ],
+      "category": "System",
+      "icon": "assets/icon.png",
+      "executableName": "orbit-relay",
+      "syncDesktopName": true,
+      "maintainer": "Orbit Relay contributors <relay@example.invalid>",
+      "synopsis": "Linux repair and support companion",
+      "description": "Understand Linux desktop issues and safely repair Flatpak user permissions."
+    }
+  }
+}
