@@ -18,7 +18,9 @@ async function main() {
   const replace = process.argv.includes('--replace');
   const iconDir = path.join(home, '.local', 'share', 'icons', 'hicolor', '256x256', 'apps');
   const appDir = path.join(home, '.local', 'share', 'applications');
-  const desktopFile = path.join(appDir, 'io.github.orbitdesktop.Relay.desktop');
+  const desktopFile = path.join(appDir, 'io.github.Smaran_Prakash_Jani.orbit-relay.desktop');
+  // Menu entry written by builds before the app ID change.
+  const legacyDesktopFile = path.join(appDir, 'io.github.orbitdesktop.Relay.desktop');
   let alreadyInstalled = false;
   try { await fs.access(versionDir); alreadyInstalled = true; }
   catch (error) { if (error.code !== 'ENOENT') throw error; }
@@ -38,6 +40,7 @@ async function main() {
     const executable = path.join(versionDir, 'orbit-relay').replace(/\\/g, '\\\\').replace(/"/g, '\\"');
     const desktop = `[Desktop Entry]\nType=Application\nName=Orbit Relay\nComment=Understand and repair Linux desktop issues\nExec="${executable}"\nIcon=orbit-relay\nTerminal=false\nCategories=System;\nStartupWMClass=orbit-relay\n`;
     await fs.writeFile(desktopFile, desktop, { mode: 0o644 });
+    await fs.rm(legacyDesktopFile, { force: true });
   } catch (error) {
     if (promoted) await fs.rm(versionDir, { recursive: true, force: true });
     if (movedCurrent) await fs.rename(backup, versionDir);

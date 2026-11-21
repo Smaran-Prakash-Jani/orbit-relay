@@ -6,16 +6,24 @@ The interface shares Orbit's warm translucent dashboard appearance. The frameles
 
 ![Orbit Relay's translucent overview](docs/overview-glass.png)
 
-## Open the app
+## Download
 
-Orbit Relay is installed for this user. Find **Orbit Relay** in the application menu under System and open it like any other desktop app. The installed executable is at `~/.local/opt/orbit-relay/0.1.1/orbit-relay`.
+Get the latest build from the [Releases page](https://github.com/Smaran-Prakash-Jani/orbit-relay/releases/latest):
 
-Ready-to-install Linux packages are in `release/`:
+- `Orbit-Relay-<version>-linux-amd64.deb` for Debian, Ubuntu and their derivatives:
 
-- `Orbit-Relay-0.1.1-linux-amd64.deb` for Debian and Ubuntu family systems.
-- `Orbit-Relay-0.1.1-linux-x86_64.AppImage` for other x86-64 systems that support AppImage.
+  ```bash
+  sudo apt install ./Orbit-Relay-<version>-linux-amd64.deb
+  ```
 
-The local app-menu installation uses the packaged `linux-unpacked` build, avoiding a system-wide install and AppImage runtime requirements. The Debian package is built but not installed on this computer. These packages are not signed or published yet.
+- `Orbit-Relay-<version>-linux-x86_64.AppImage` for other x86-64 distributions (may need your distribution's FUSE package):
+
+  ```bash
+  chmod +x Orbit-Relay-<version>-linux-x86_64.AppImage
+  ./Orbit-Relay-<version>-linux-x86_64.AppImage
+  ```
+
+After installing the `.deb`, open **Orbit Relay** from the application menu under System. The packages are unsigned.
 
 ## First release
 
@@ -40,7 +48,7 @@ npm run build:linux
 npm run install:user
 ```
 
-`npm start` runs the source checkout for development. The install command creates a versioned copy under `~/.local/opt/orbit-relay/` and an application-menu entry under `~/.local/share/applications/`.
+`npm start` runs the source checkout for development. `npm run install:user` installs for your user only, without root: a versioned copy under `~/.local/opt/orbit-relay/` and an application-menu entry under `~/.local/share/applications/`.
 To refresh an existing installed version after rebuilding, run `npm run install:user:replace`; the installer stages the new files and restores the previous copy if installation fails.
 
 For checks without a graphical session:
